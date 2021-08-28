@@ -23,14 +23,14 @@ function App() {
     await db.collection("album").doc(userName).set({
       name: userName,
       image: fileUrl,
-      test: new Date().getTime()
+      createdAt: new Date().getTime()
     })
     e.target.reset();
   }
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const userCollections = await db.collection("album").orderBy('test', 'desc').get();
+      const userCollections = await db.collection("album").orderBy('createdAt', 'desc').get();
       setCollection(userCollections.docs.map(doc => {
         console.log(doc.data());
         return doc.data();
